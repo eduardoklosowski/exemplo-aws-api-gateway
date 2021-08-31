@@ -199,3 +199,7 @@ Após isso é possível verificar o que será criado ou aplicar as alterações 
 terraform plan -var-file=config.tfvars
 terraform apply -var-file=config.tfvars
 ```
+
+Exemplo em vídeo:
+
+[![asciicast](https://asciinema.org/a/433410.svg)](https://asciinema.org/a/433410)
