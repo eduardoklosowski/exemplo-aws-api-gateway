@@ -1,0 +1,17 @@
+# Config
+/.env
+*.tfvars
+
+# Python
+/env/
+*.py[cod]
+__pycache__/
+
+# Terraform
+/.terraform/
+*.tfstate
+*.tfstate.*
+/outputs/
+
+# Editores
+/.vscode/

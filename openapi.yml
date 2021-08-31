@@ -1,0 +1,155 @@
+openapi: 3.1.0
+info:
+  title: Tarefas API
+  version: 0.1.0
+  summary: API de lista de tarefas
+  description: Uma API simples de lista de tarefas (*to do list*).
+externalDocs:
+  description: Repositório
+  url: https://github.com/eduardoklosowski/exemplo-aws-api-gateway
+servers:
+  - url: http://{host}/{apigateway_basepath}/
+    description: Servidor do LocalStack
+    variables:
+      host:
+        default: localhost:4566
+        descriptions: Endereço do servidor
+      apigateway_basepath:
+        default: restapis/{api_id}/main/_user_request_
+        descriptions: Caminho base para a API
+components:
+  schemas:
+    Tarefa:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+          default: 00000000-0000-0000-0000-000000000000
+        nome:
+          type: string
+          default: Teste
+        descricao:
+          type: string
+          default: Tarefa de teste da API
+        feito:
+          type: boolean
+          default: false
+        criadoEm:
+          type: string
+          format: date-time
+          readOnly: true
+        feitoEm:
+          type: string
+          format: date-time
+          readOnly: true
+          nullable: true
+tags:
+  - name: tarefa
+    description: Operações nas tarefas da lista
+paths:
+  /tarefas:
+    post:
+      tags:
+        - tarefa
+      summary: Adiciona uma nova tarefa
+      operationId: addTarefa
+      requestBody:
+        description: Tarefa a ser adicionada
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Tarefa"
+        required: true
+      responses:
+        201:
+          description: Tarefa adicionada
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Tarefa"
+    get:
+      tags:
+        - tarefa
+      summary: Lista todas as tarefas
+      operationId: listTarefa
+      responses:
+        200:
+          description: Lista de tarefas
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Tarefa"
+  /tarefas/{idTarefa}:
+    get:
+      tags:
+        - tarefa
+      summary: Recupera uma tarefa
+      operationId: getTarefa
+      parameters:
+        - name: idTarefa
+          in: path
+          description: ID da tarefa
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        200:
+          description: Tarefa recuperada
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Tarefa"
+        404:
+          description: Tarefa não encontrada
+    put:
+      tags:
+        - tarefa
+      summary: Atualiza uma tarefa
+      operationId: editTarefa
+      parameters:
+        - name: idTarefa
+          in: path
+          description: ID da tarefa
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        description: Atualização da tarefa
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Tarefa"
+        required: true
+      responses:
+        200:
+          description: Tarefa atualizada
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Tarefa"
+        404:
+          description: Tarefa não encontrada
+    delete:
+      tags:
+        - tarefa
+      summary: Remove uma tarefa
+      operationId: deleteTarefa
+      parameters:
+        - name: idTarefa
+          in: path
+          description: ID da tarefa
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        200:
+          description: Tarefa removida
+        404:
+          description: Tarefa não encontrada
