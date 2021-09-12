@@ -2,6 +2,8 @@
 
 Código de exemplo de uma [API Rest](https://www.restapitutorial.com/) utilizando [API Gateway](https://docs.aws.amazon.com/apigateway/) e [Lambda](https://docs.aws.amazon.com/lambda/) da [AWS](https://aws.amazon.com/pt/), com deploy através do [Terraform](https://www.terraform.io/) no [LocalStack](https://localstack.cloud/).
 
+Artigo descrevendo o processo, tecnologias e ferramentas desse exemplo: [DEV](https://dev.to/acaverna/exemplo-de-aws-api-gateway-com-lambda-pelo-terraform-efi) ou [meu blog](https://eduardoklosowski.github.io/blog/exemplo-aws-api-gateway/).
+
 ## Subir ambiente
 
 Esse exemplo utiliza um banco de dados [PostgreSQL](https://hub.docker.com/_/postgres) e o [LocalStack](https://hub.docker.com/r/localstack/localstack) através do [docker-compose](https://docs.docker.com/compose/).
